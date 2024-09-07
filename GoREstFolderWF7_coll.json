@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "be8882e6-37fe-4460-84a7-606cb3ea421a",
+		"name": "GoREst_FolderWorkFlow7",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14181558",
+		"_collection_link": "https://interstellar-spaceship-142461.postman.co/workspace/NewAugWS24~7f54f7a9-0ec6-4d3f-a8ec-e64004bd3138/collection/14181558-be8882e6-37fe-4460-84a7-606cb3ea421a?action=share&source=collection_link&creator=14181558"
+	},
+	"item": [
+		{
+			"name": "Get APIs",
+			"item": [
+				{
+					"name": "1-GetAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/public/v2/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"public",
+								"v2",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"pm.test(\"Response time is less than 10000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(10000);\r",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "POST APIs",
+			"item": [
+				{
+					"name": "2-createAuser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"const userId = response.id;\r",
+									"console.log(\"user id created is: \"+userId);\r",
+									"\r",
+									"pm.variables.set(\"user_id\", userId);\r",
+									"\r",
+									"//--------------------------Now TC validations written at collection level"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{tokenid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"{{$randomFirstName}}\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"gender\": \"female\",\r\n        \"status\": \"active\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/public/v2/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"public",
+								"v2",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PUT APIs",
+			"item": [
+				{
+					"name": "3-UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{tokenid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n\"gender\": \"female\",\r\n\"status\": \"inactive\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/public/v2/users/{{user_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"public",
+								"v2",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4-PatchPartialInfo",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{tokenid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gorest.co.in/public/v2/users/{{user_id}}",
+							"protocol": "https",
+							"host": [
+								"gorest",
+								"co",
+								"in"
+							],
+							"path": [
+								"public",
+								"v2",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE APIs",
+			"item": [
+				{
+					"name": "5-DeleteExistingUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{tokenid}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://gorest.co.in/public/v2/users/{{user_id}}",
+							"protocol": "https",
+							"host": [
+								"gorest",
+								"co",
+								"in"
+							],
+							"path": [
+								"public",
+								"v2",
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"if(pm.request.method == 'GET'){\r",
+					"\tpm.test(\"Status code is 200\",function(){\r",
+					"\tpm.response.to.have.status(200);\r",
+					"\t})\r",
+					"} \r",
+					"\r",
+					"if(pm.request.method == 'POST'){\r",
+					"\tpm.test(\"Status code is 201\",function(){\r",
+					"\tpm.response.to.have.status(201);\r",
+					"\t})\r",
+					"} \r",
+					"\r",
+					"if(pm.request.method == 'PUT'|| pm.request.method == 'PATCH'){\r",
+					"\tpm.test(\"Status code is 200\",function(){\r",
+					"\tpm.response.to.have.status(200);\r",
+					"\t})\r",
+					"}\r",
+					"\r",
+					"if(pm.request.method == 'DELETE'){\r",
+					"\tpm.test(\"Status code is 204\",function(){\r",
+					"\tpm.response.to.have.status(204);\r",
+					"\t})\r",
+					"} \r",
+					"\r",
+					"//--------Response Time Validation\r",
+					"if(pm.request.method !=\"1-GetAllUsers\"){\r",
+					"\r",
+					"    pm.test(\"Response time is less than 5000ms\", function () {\r",
+					"        pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+					"    });\r",
+					"}"
+				]
+			}
+		}
+	]
+}

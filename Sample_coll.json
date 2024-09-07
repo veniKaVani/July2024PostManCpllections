@@ -1,0 +1,33 @@
+{
+	"info": {
+		"_postman_id": "6495cfd3-0339-4623-af8e-5aae3a2d81cd",
+		"name": "Sample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14181558",
+		"_collection_link": "https://interstellar-spaceship-142461.postman.co/workspace/NewAugWS24~7f54f7a9-0ec6-4d3f-a8ec-e64004bd3138/collection/14181558-6495cfd3-0339-4623-af8e-5aae3a2d81cd?action=share&source=collection_link&creator=14181558"
+	},
+	"item": [
+		{
+			"name": "getuser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
